@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% block title %}Leaderboard{% endblock %} {% block
+content %}
+<h1>Leaderboard</h1>
+<table border="1">
+  <thead>
+    <tr>
+      <th>Place</th>
+      <th>Username</th>
+      <th>Total Points</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in leaderboard %}
+    <tr>
+      <td>{{ loop.index }} place</td>
+      <!-- Updated Place -->
+      <td>{{ item[0] }}</td>
+      <!-- Username -->
+      <td>{{ item[1] }} points</td>
+      <!-- Updated Total Points -->
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

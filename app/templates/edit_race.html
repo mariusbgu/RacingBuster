@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Edit Race</h2>
+<form method="POST">
+  <div class="mb-3">
+    <label for="name" class="form-label">Race Name</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      class="form-control"
+      value="{{ race.name }}"
+      required
+    />
+  </div>
+  <div class="mb-3">
+    <label for="date" class="form-label">Race Day</label>
+    <select name="date" id="date" class="form-control" required>
+      <option value="Tuesday" {% if race.date == 'Tuesday' %}selected{% endif %}>Tuesday</option>
+      <option value="Wednesday" {% if race.date == 'Wednesday' %}selected{% endif %}>Wednesday</option>
+      <option value="Thursday" {% if race.date == 'Thursday' %}selected{% endif %}>Thursday</option>
+      <option value="Friday" {% if race.date == 'Friday' %}selected{% endif %}>Friday</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-success">Update Race</button>
+</form>
+{% endblock %}

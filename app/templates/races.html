@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% block title %}Races{% endblock %} {% block content
+%}
+<h1>Races for {{ day }}</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Race Name</th>
+      <th>Selection</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for race in races %}
+    <tr>
+      <td>{{ race.name }}</td>
+      <td>
+        {% if race.locked %}
+        <button class="btn" disabled>Race Locked</button>
+        {% elif race.id in user_selected_races %}
+        <button class="btn" disabled>Selection Submitted</button>
+        {% else %}
+        <form method="POST" action="{{ url_for('races', day=day) }}">
+          {{ form.hidden_tag() }}
+          <input type="hidden" name="race_id" value="{{ race.id }}" />
+          {{ form.selection }} {{ form.submit(class="btn") }}
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

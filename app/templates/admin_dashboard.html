@@ -1,0 +1,54 @@
+{% extends "base.html" %} {% block content %}
+<h2>Admin Dashboard - Manage Race Results</h2>
+
+<div class="race-container">
+  {% for race in races %}
+  <div class="race-card">
+    <div class="race-header">
+      <strong>Race Day:</strong> {{ race.day }}<br />
+      <strong>Race Name:</strong> {{ race.name }}
+    </div>
+    <form method="POST" class="race-form">
+      {{ form.hidden_tag() }}
+      <div class="race-details">
+        <label
+          >1st:
+          <input
+            type="number"
+            name="first_position"
+            value="{{ race.first_position or '' }}"
+        /></label>
+        <label
+          >2nd:
+          <input
+            type="number"
+            name="second_position"
+            value="{{ race.second_position or '' }}"
+        /></label>
+        <label
+          >3rd:
+          <input
+            type="number"
+            name="third_position"
+            value="{{ race.third_position or '' }}"
+        /></label>
+        <label
+          >Locked:
+          <input
+            type="checkbox"
+            name="locked"
+            {%
+            if
+            race.locked
+            %}checked{%
+            endif
+            %}
+        /></label>
+      </div>
+      <input type="hidden" name="race_id" value="{{ race.id }}" />
+      <button type="submit" class="btn save-btn">Save</button>
+    </form>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

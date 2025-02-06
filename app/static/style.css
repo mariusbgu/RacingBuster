@@ -1,0 +1,223 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h1, h2 {
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Navbar Styling */
+.navbar-dark .navbar-nav .nav-link {
+    color: white !important;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    text-decoration: underline;
+}
+
+/* Container Styling */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f8f8f8;
+}
+
+/* General Button Styles */
+.day-button, .btn {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #041322;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    width: auto;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+/* Hover Effect */
+.btn:hover, .day-button:hover {
+    background-color: #0056b3;
+}
+
+/* Fix for White Buttons */
+input[type="submit"], button[type="submit"] {
+    background-color: #041322;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover, button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Bootstrap Button Fix */
+.btn-primary, .btn-success {
+    background-color: #041322 !important;
+    border-color: #041322 !important;
+}
+
+.btn-primary:hover, .btn-success:hover {
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+/* Races Page Styling */
+.race-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.race-card {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.race-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.race-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        display: block;
+        margin: 5px 0;
+    }
+
+    /* Responsive Table Adjustments */
+    table {
+        display: block;
+        width: 100%;
+    }
+
+    table thead {
+        display: none; /* Hide table headers */
+    }
+
+    table tbody {
+        display: block;
+    }
+
+    table tr {
+        display: block;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    table td {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    table td:nth-child(2) {
+        margin-top: 10px; /* Moves selection and submit below race name */
+    }
+
+    .btn {
+        width: 100%; /* Make buttons full-width for easier tapping */
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .race-details {
+        grid-template-columns: 1fr;
+    }
+
+    .race-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
+
+    .day-button {
+        width: 100%;
+        padding: 15px;
+    }
+
+    table th, table td {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    nav a {
+        display: block;
+        text-align: center;
+    }
+}

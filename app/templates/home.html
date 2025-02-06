@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block title %}Home{% endblock %} {% block content
+%}
+<h1>Racking Buster</h1>
+<p>Select a race day to see available races:</p>
+<div class="days">
+  <a href="{{ url_for('races', day='Tuesday') }}" class="day-button">Tuesday</a>
+  <a href="{{ url_for('races', day='Wednesday') }}" class="day-button"
+    >Wednesday</a
+  >
+  <a href="{{ url_for('races', day='Thursday') }}" class="day-button"
+    >Thursday</a
+  >
+  <a href="{{ url_for('races', day='Friday') }}" class="day-button">Friday</a>
+</div>
+{% if current_user.role == 'admin' %}
+<p>You are logged in as an Admin.</p>
+<a href="{{ url_for('admin_dashboard') }}" class="day-button"
+  >Admin Dashboard</a
+>
+{% endif %} {% endblock %}
