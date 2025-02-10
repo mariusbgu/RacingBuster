@@ -58,6 +58,8 @@ def create_app():
     app.add_url_rule('/admin/edit_race/<int:race_id>', 'edit_race', routes.edit_race, methods=['GET', 'POST'])
     app.add_url_rule('/admin/delete_race/<int:race_id>', 'delete_race', routes.delete_race, methods=['POST'])
     app.add_url_rule('/admin/add_race', 'add_race', routes.add_race, methods=['GET', 'POST'])
+    app.add_url_rule('/admin/selections', 'admin_selections', routes.admin_selections, methods=['GET', 'POST'])
+
 
 
     return app

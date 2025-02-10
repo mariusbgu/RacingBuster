@@ -1,27 +1,34 @@
 {% extends 'base.html' %} {% block title %}Races{% endblock %} {% block content
 %}
 <h1>Races for {{ day }}</h1>
-<table>
-  <thead>
+
+<table class="table table-striped table-bordered text-center">
+  <thead class="table-dark">
     <tr>
       <th>Race Name</th>
       <th>Selection</th>
     </tr>
   </thead>
   <tbody>
-    {% for race in races %}
+    {% for race in races %} {% set user_selection = user_selections |
+    selectattr("race_id", "equalto", race.id) | first %}
     <tr>
       <td>{{ race.name }}</td>
       <td>
-        {% if race.locked %}
-        <button class="btn" disabled>Race Locked</button>
-        {% elif race.id in user_selected_races %}
-        <button class="btn" disabled>Selection Submitted</button>
+        {% if user_selection %}
+        <!-- Show the selected number if the user has already submitted -->
+        <span class="badge bg-dark">
+          Your Selection: {{ user_selection.selection_value }}
+        </span>
+        {% elif race.locked %}
+        <!-- Show 'Race Locked' only if no selection was made before locking -->
+        <button class="btn btn-secondary" disabled>Race Locked</button>
         {% else %}
+        <!-- Show the selection form if the user has not selected yet -->
         <form method="POST" action="{{ url_for('races', day=day) }}">
           {{ form.hidden_tag() }}
           <input type="hidden" name="race_id" value="{{ race.id }}" />
-          {{ form.selection }} {{ form.submit(class="btn") }}
+          {{ form.selection }} {{ form.submit(class="btn btn-primary btn-sm") }}
         </form>
         {% endif %}
       </td>
@@ -29,4 +36,5 @@
     {% endfor %}
   </tbody>
 </table>
+
 {% endblock %}

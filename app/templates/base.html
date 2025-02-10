@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}Racking Buster{% endblock %}</title>
+    <title>{% block title %}Racing Buster{% endblock %}</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
@@ -20,7 +20,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('home') }}">Racking Buster</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Racing Buster</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -73,6 +73,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('admin_races') }}"
                 >Manage Races</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('admin_selections') }}"
+                >Manage Selections</a
               >
             </li>
             {% endif %}

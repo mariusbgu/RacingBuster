@@ -18,8 +18,14 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class RaceSelectionForm(FlaskForm):
-    selection = IntegerField('Select Horse Number', validators=[DataRequired()])
+    selection = IntegerField('Select Horse Number', validators=[Optional()])  # Allow showing existing selection
     submit = SubmitField('Submit')
+
+class AdminSelectionForm(FlaskForm):
+    selection = IntegerField('New Selection', validators=[DataRequired()])
+    submit = SubmitField('Update')
+
+
 
 class RaceResultForm(FlaskForm):
     first_position = IntegerField('1st Place', validators=[Optional()], render_kw={"placeholder": "Enter horse #"})

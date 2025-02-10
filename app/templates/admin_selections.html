@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Selections{% endblock %}
+
+{% block content %}
+<h1>Admin: Manage Selections</h1>
+
+<!-- User selection dropdown -->
+<form method="GET" action="{{ url_for('admin_selections') }}">
+    <label for="user_id">Select User:</label>
+    <select name="user_id" id="user_id" class="form-select" onchange="this.form.submit()">
+        <option value="">-- Choose a User --</option>
+        {% for user in users %}
+        <option value="{{ user.id }}" {% if user.id == selected_user_id %}selected{% endif %}>
+            {{ user.username }}
+        </option>
+        {% endfor %}
+    </select>
+</form>
+
+<!-- Display races & selections -->
+{% if selections %}
+<table class="table table-striped table-bordered text-center mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>Race</th>
+            <th>Current Selection</th>
+            <th>New Selection</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for selection in selections %}
+        <tr>
+            <td>{{ selection.race.name }}</td>
+            <td><span class="badge bg-dark">{{ selection.selection_value }}</span></td>
+            <td>
+                <form method="POST" action="{{ url_for('admin_selections', user_id=selected_user_id) }}">
+                    {{ form.hidden_tag() }}
+                    <input type="hidden" name="selection_id" value="{{ selection.id }}">
+                    {{ form.selection(class="form-control", value=selection.selection_value) }}
+            </td>
+            <td>
+                {{ form.submit(class="btn btn-primary btn-sm") }}
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

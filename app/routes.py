@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash, ses
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 from functools import wraps
-from .forms import RegistrationForm, LoginForm, RaceSelectionForm, RaceResultForm
+from .forms import RegistrationForm, LoginForm, RaceSelectionForm, RaceResultForm, AdminSelectionForm
 from .models import User, Race, Selection
 from . import db
 app = Flask(__name__)
@@ -109,7 +109,7 @@ def races(day):
 
         return redirect(url_for("races", day=day))
 
-    return render_template("races.html", day=day, races=races, form=form, user_selected_races=user_selected_races)
+    return render_template("races.html", day=day, races=races, form=form, user_selected_races=user_selected_races, user_selections=user_selections)
 
 
 @app.route("/leaderboard")
@@ -279,6 +279,41 @@ def delete_race(race_id):
     db.session.commit()
     flash("Race deleted successfully!", "success")
     return redirect(url_for('manage_races'))
+
+@app.route("/admin/selections", methods=["GET", "POST"])
+@login_required
+@admin_required  # Make sure only admins can access this
+def admin_selections():
+    users = User.query.all()  # Fetch all users
+    selected_user_id = request.args.get("user_id", type=int)  # Get user from dropdown
+    selections = None
+
+    if selected_user_id:
+        selections = Selection.query.filter_by(user_id=selected_user_id).all()
+
+    form = AdminSelectionForm()
+
+    if form.validate_on_submit():
+        selection_id = request.form.get("selection_id")
+        new_value = form.selection.data
+        selection = Selection.query.get(selection_id)
+
+        if selection:
+            selection.selection_value = new_value
+            db.session.commit()
+            flash("Selection updated successfully.", "success")
+        else:
+            flash("Invalid selection.", "danger")
+
+        return redirect(url_for("admin_selections", user_id=selected_user_id))
+
+    return render_template(
+        "admin_selections.html", 
+        users=users, 
+        selections=selections, 
+        selected_user_id=selected_user_id, 
+        form=form
+    )
 
 
 # Error Handlers
